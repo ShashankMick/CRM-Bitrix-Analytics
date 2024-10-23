@@ -3,12 +3,12 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-
+data_load = pd.read_excel("Deal_Bitrix.xlsx")
 
 # Load the .xls file using the xlrd engine
 @st.cache_data
-def load_data():
-    df = pd.read_excel("https://github.com/ShashankMick/CRM-Bitrix-Analytics/blob/main/Deal_Bitrix.xlsx", engine='openpyxl')
+def load_data(df):
+    
     # Selecting columns we need for analysis
     sel_cols = f"ID, Created, Modified, Stage, Created by, Modified by, Responsible, Repeat inquiry, Deal Name, Type, Source, Company, Contact, UTM Source, UTM Medium, UTM Campaign, UTM Content, UTM Term, Lead Status, Reason for Loss, Reasons for Win, Follow Up Status, Nature of Project, Services, LS - Service Fit, LS - Urgency, LG - Budget Availability, LG - Decision Making Capability, Contact: ID, Contact: First name, Contact: Last name, Contact: Position, Contact: Responsible person, Contact: Source, Contact: Work Phone, Contact: Mobile, Contact: Shopify Store URL, Contact: Do you have a shopify website, Contact: Do you want to build a shopify website, Contact: Do you have a D2C/eCommerce webiste, Contact: Do you need any help with your online business?, Company: Company Name"
     sel_cols_list = sel_cols.split(", ")
@@ -19,7 +19,7 @@ def load_data():
     'Contact: Do you need any help with your online business?': 'Services Needed'}, inplace=True)
     return df
 
-df = load_data()
+df = load_data(data_load)
 
 
 # df.head()
