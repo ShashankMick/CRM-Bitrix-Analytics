@@ -118,8 +118,6 @@ for col in filter_columns:
     selected_values = st.sidebar.multiselect(f'Select {col}', unique_values, default=unique_values)
     selected_filters[col] = selected_values
 
-
-
 # Filter the DataFrame based on user-selected filters and date range
 filtered_df = cum_stages_breakdown_expanded.copy()
 
