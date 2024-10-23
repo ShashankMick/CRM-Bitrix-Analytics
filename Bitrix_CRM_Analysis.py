@@ -100,8 +100,8 @@ st.write(f"End Date: {end_date}")
 if start_date > end_date:
     st.error("Error: Start date must be before or equal to the end date.")
 # List of potential filter columns-later
-filter_columns = ['Stage','Lead Status', 'Responsible','UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content','Nature of Project', 'D2C Website (y/n)', 'Services Needed']
-# ,'Type','Source']
+filter_columns = ['Stage','Lead Status', 'Responsible','Source','UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content','Nature of Project', 'D2C Website (y/n)', 'Services Needed']
+# 
 
 # Dropdown for selecting the breakdown variable
 breakdown_var = st.sidebar.selectbox(
