@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-df = pd.read_excel("Deal_Bitrix.xlsx")
+data_load = pd.read_excel("Deal_Bitrix.xlsx")
 
 # Load the .xls file using the xlrd engine
 @st.cache_data
@@ -19,7 +19,7 @@ def load_data(df):
     'Contact: Do you need any help with your online business?': 'Services Needed'}, inplace=True)
     return df
 
-df = load_data(df)
+df = load_data(data_load)
 
 
 # df.head()
@@ -77,7 +77,7 @@ start_date, end_date = st.sidebar.date_input(
 )
 
 # List of potential filter columns
-filter_columns = ['Lead Status', 'Responsible','Type', 'Source','UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content', 'Nature of Project','ShopifyURL', 'D2C Website (y/n)', 'Services Needed']
+filter_columns = ['Lead Status', 'Responsible','Type', 'Source','UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content', 'Nature of Project', 'D2C Website (y/n)', 'Services Needed']
 
 # Dropdown for selecting the breakdown variable
 breakdown_var = st.sidebar.selectbox(
