@@ -6,7 +6,7 @@ import plotly.express as px
 data_load = pd.read_excel("Deal_Bitrix.xlsx")
 
 # Load the .xls file using the xlrd engine
-@st.cache_data
+# @st.cache_data
 def load_data(df):
     
     # Selecting columns we need for analysis
