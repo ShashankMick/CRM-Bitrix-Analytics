@@ -80,8 +80,7 @@ start_date, end_date = st.sidebar.date_input(
     min_value=min_date,
     max_value=max_date
 )
-
-# List of potential filter columns
+# List of potential filter columns-later
 filter_columns = ['Lead Status', 'Responsible']
 # ,'Type', 'Source','UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content', 'Nature of Project', 'D2C Website (y/n)', 'Services Needed']
 
