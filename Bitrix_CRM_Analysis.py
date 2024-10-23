@@ -112,7 +112,7 @@ breakdown_var = st.sidebar.selectbox(
 # Dictionary to store selected filters
 selected_filters = {}
 
-# Loop through each filter column and create a multiselect dropdown
+# Loop through each filter column and create multiselect dropdowns
 for col in filter_columns:
     unique_values = list(cum_stages_breakdown_expanded[col].dropna().unique())
     selected_values = st.sidebar.multiselect(f'Select {col}', unique_values, default=unique_values)
