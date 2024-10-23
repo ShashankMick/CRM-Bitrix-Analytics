@@ -74,16 +74,29 @@ st.sidebar.title("Filter Options")
 # Add date range filter in the sidebar
 min_date = cum_stages_breakdown_expanded['Created'].min()
 max_date = cum_stages_breakdown_expanded['Created'].max()
+# Separate date input for start date
 start_date = st.sidebar.date_input(
     "Start Date",
-    [min_date, max_date],
-    min_value = min_date,
-    )
+    value=min_date,
+    min_value=min_date,
+    max_value=max_date
+)
+
+# Separate date input for end date
 end_date = st.sidebar.date_input(
     "End Date",
-    [min_date, max_date],
-    max_value = max_date
+    value=max_date,
+    min_value=min_date,
+    max_value=max_date
 )
+
+# Display selected dates for debugging
+st.write(f"Start Date: {start_date}")
+st.write(f"End Date: {end_date}")
+
+# Ensure the start date is before the end date
+if start_date > end_date:
+    st.error("Error: Start date must be before or equal to the end date.")
 # List of potential filter columns-later
 filter_columns = ['Lead Status', 'Responsible','UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content']
 # ,'Type','Source','UTM Source','UTM Medium', 'UTM Campaign', 'UTM Content', 'Nature of Project', 'D2C Website (y/n)', 'Services Needed']
