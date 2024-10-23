@@ -33,8 +33,9 @@ df = load_data(data_load)
 
 
 # Modifying time columns to datetime variable
-df['Created'] = pd.to_datetime(df['Created'], format='%d.%m.%Y %H:%M:%S')
-df['Modified'] = pd.to_datetime(df['Modified'], format='%d.%m.%Y %H:%M:%S')
+# Safely convert 'Created' and 'Modified' columns to datetime
+df.loc[:, 'Created'] = pd.to_datetime(df['Created'], format='%d.%m.%Y %H:%M:%S')
+df.loc[:, 'Modified'] = pd.to_datetime(df['Modified'], format='%d.%m.%Y %H:%M:%S')
 
 #Extracting all stages
 # stages = df['Stage'].unique().tolist()
