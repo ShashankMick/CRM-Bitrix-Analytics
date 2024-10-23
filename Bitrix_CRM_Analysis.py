@@ -3,6 +3,10 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+# Clear cache
+st.experimental_singleton.clear()
+st.experimental_memo.clear()
+
 data_load = pd.read_excel("Deal_Bitrix.xlsx")
 
 # Load the .xls file using the xlrd engine
