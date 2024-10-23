@@ -43,7 +43,7 @@ stages = ['Reach','Attract','Develop','Meeting Booked','SQL','Proposal','Contrac
 #stages
 
 # Making cumulative of stages by repeating all stages after it to that stage in an expanded dataframe
-@st.cache_data
+# @st.cache_data
 def expand_cumulative_stages(df, stages, stage_col='Stage'):
     expanded_data = []
     
