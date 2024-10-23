@@ -77,12 +77,12 @@ max_date = cum_stages_breakdown_expanded['Created'].max()
 start_date = st.sidebar.date_input(
     "Start Date",
     [min_date, max_date],
-    min_value=min_date,
+    min_value = min_date,
     )
 end_date = st.sidebar.date_input(
     "End Date",
     [min_date, max_date],
-    max_value=max_date
+    max_value = max_date
 )
 # List of potential filter columns-later
 filter_columns = ['Lead Status', 'Responsible','UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content']
