@@ -7,6 +7,14 @@ import plotly.express as px
 @st.cache_data
 def load_data():
     df = pd.read_excel("Deal_Bitrix.xlsx")
+    # Selecting columns we need for analysis
+    sel_cols = f"ID, Created, Modified, Stage, Created by, Modified by, Responsible, Repeat inquiry, Deal Name, Type, Source, Company, Contact, UTM Source, UTM Medium, UTM Campaign, UTM Content, UTM Term, Lead Status, Reason for Loss, Reasons for Win, Follow Up Status, Nature of Project, Services, LS - Service Fit, LS - Urgency, LG - Budget Availability, LG - Decision Making Capability, Contact: ID, Contact: First name, Contact: Last name, Contact: Position, Contact: Responsible person, Contact: Source, Contact: Work Phone, Contact: Mobile, Contact: Shopify Store URL, Contact: Do you have a shopify website, Contact: Do you want to build a shopify website, Contact: Do you have a D2C/eCommerce webiste, Contact: Do you need any help with your online business?, Company: Company Name"
+    sel_cols_list = sel_cols.split(", ")
+    df = df[sel_cols_list]
+    df.rename(columns={
+    'Contact: Shopify Store URL': 'ShopifyURL',
+    'Contact: Do you have a D2C/eCommerce webiste': 'D2C Website (y/n)',
+    'Contact: Do you need any help with your online business?': 'Services Needed'}, inplace=True)
     return df
 
 df = load_data()
@@ -20,11 +28,6 @@ df = load_data()
 #     print(f"Sample Values: {df[col].unique()[:5]}")
 #     print("-" * 30)
 
-# Selecting columns we need for analysis
-sel_cols = f"ID, Created, Modified, Stage, Created by, Modified by, Responsible, Repeat inquiry, Deal Name, Type, Source, Company, Contact, UTM Source, UTM Medium, UTM Campaign, UTM Content, UTM Term, Lead Status, Reason for Loss, Reasons for Win, Follow Up Status, Nature of Project, Services, LS - Service Fit, LS - Urgency, LG - Budget Availability, LG - Decision Making Capability, Contact: ID, Contact: First name, Contact: Last name, Contact: Position, Contact: Responsible person, Contact: Source, Contact: Work Phone, Contact: Mobile, Contact: Shopify Store URL, Contact: Do you have a shopify website, Contact: Do you want to build a shopify website, Contact: Do you have a D2C/eCommerce webiste, Contact: Do you need any help with your online business?, Company: Company Name"
-sel_cols_list = sel_cols.split(", ")
-df = df[sel_cols_list]
-# df.info()
 
 # Modifying time columns to datetime variable
 df['Created'] = pd.to_datetime(df['Created'], format='%d.%m.%Y %H:%M:%S')
@@ -71,7 +74,13 @@ start_date, end_date = st.sidebar.date_input(
 )
 
 # List of potential filter columns
-filter_columns = ['Lead Status', 'Responsible']
+filter_columns = ['Lead Status', 'Responsible','Type', 'Source','UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content', 'Nature of Project','ShopifyURL', 'D2C Website (y/n)', 'Services Needed']
+
+# Dropdown for selecting the breakdown variable
+breakdown_var = st.sidebar.selectbox(
+    'Select Breakdown Variable',
+    filter_columns
+)
 
 # Dictionary to store selected filters
 selected_filters = {}
@@ -82,11 +91,7 @@ for col in filter_columns:
     selected_values = st.sidebar.multiselect(f'Select {col}', unique_values, default=unique_values)
     selected_filters[col] = selected_values
 
-# Dropdown for selecting the breakdown variable
-breakdown_var = st.sidebar.selectbox(
-    'Select Breakdown Variable',
-    filter_columns
-)
+
 
 # Filter the DataFrame based on user-selected filters and date range
 filtered_df = cum_stages_breakdown_expanded.copy()
