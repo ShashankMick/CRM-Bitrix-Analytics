@@ -8,7 +8,7 @@ import plotly.express as px
 # Load the .xls file using the xlrd engine
 @st.cache_data
 def load_data():
-    df = pd.read_excel("Deal_Bitrix.xlsx")
+    df = pd.read_excel("https://github.com/ShashankMick/CRM-Bitrix-Analytics/blob/main/Deal_Bitrix.xlsx")
     # Selecting columns we need for analysis
     sel_cols = f"ID, Created, Modified, Stage, Created by, Modified by, Responsible, Repeat inquiry, Deal Name, Type, Source, Company, Contact, UTM Source, UTM Medium, UTM Campaign, UTM Content, UTM Term, Lead Status, Reason for Loss, Reasons for Win, Follow Up Status, Nature of Project, Services, LS - Service Fit, LS - Urgency, LG - Budget Availability, LG - Decision Making Capability, Contact: ID, Contact: First name, Contact: Last name, Contact: Position, Contact: Responsible person, Contact: Source, Contact: Work Phone, Contact: Mobile, Contact: Shopify Store URL, Contact: Do you have a shopify website, Contact: Do you want to build a shopify website, Contact: Do you have a D2C/eCommerce webiste, Contact: Do you need any help with your online business?, Company: Company Name"
     sel_cols_list = sel_cols.split(", ")
