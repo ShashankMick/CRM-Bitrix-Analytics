@@ -4,19 +4,21 @@ import pandas as pd
 import plotly.express as px
 
 # Clear cache on app update
-st.cache_data.clear()
-st.cache_resource.clear()
+# st.cache_data.clear()
+# st.cache_resource.clear()
 
 data_load = pd.read_excel("Deal_Bitrix.xlsx")
 
 # Load the .xls file using the xlrd engine
-# @st.cache_data
+@st.cache_data
 def load_data(df):
     
     # Selecting columns we need for analysis
     sel_cols = f"ID, Created, Modified, Stage, Created by, Modified by, Responsible, Repeat inquiry, Deal Name, Type, Source, Company, Contact, UTM Source, UTM Medium, UTM Campaign, UTM Content, UTM Term, Lead Status, Reason for Loss, Reasons for Win, Follow Up Status, Nature of Project, Services, LS - Service Fit, LS - Urgency, LG - Budget Availability, LG - Decision Making Capability, Contact: ID, Contact: First name, Contact: Last name, Contact: Position, Contact: Responsible person, Contact: Source, Contact: Work Phone, Contact: Mobile, Contact: Shopify Store URL, Contact: Do you have a shopify website, Contact: Do you want to build a shopify website, Contact: Do you have a D2C/eCommerce webiste, Contact: Do you need any help with your online business?, Company: Company Name"
     sel_cols_list = sel_cols.split(", ")
     df = df[sel_cols_list]
+    for cols in sel_cols_list:
+        df[cols] = df[cols].fillna('Unknown')
     df.rename(columns={
     'Contact: Shopify Store URL': 'ShopifyURL',
     'Contact: Do you have a D2C/eCommerce webiste': 'D2C Website (y/n)',
@@ -47,7 +49,7 @@ stages = ['Reach','Attract','Develop','Meeting Booked','SQL','Proposal','Contrac
 #stages
 
 # Making cumulative of stages by repeating all stages after it to that stage in an expanded dataframe
-# @st.cache_data
+@st.cache_data
 def expand_cumulative_stages(df, stages, stage_col='Stage'):
     expanded_data = []
     
@@ -156,4 +158,4 @@ fig.update_layout(
 st.plotly_chart(fig)
 
 # Add a footer message
-st.sidebar.write("Powered by Streamlit")
+st.sidebar.write("Powered by Expedify")
