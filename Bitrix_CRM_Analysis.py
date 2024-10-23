@@ -4,9 +4,8 @@ import pandas as pd
 import plotly.express as px
 
 # Clear cache on app update
-if st.button('Clear Cache'):
-    st.cache_data.clear()
-    st.cache_resource.clear()
+st.cache_data.clear()
+st.cache_resource.clear()
 
 data_load = pd.read_excel("Deal_Bitrix.xlsx")
 
