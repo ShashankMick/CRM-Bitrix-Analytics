@@ -82,7 +82,7 @@ start_date, end_date = st.sidebar.date_input(
 )
 # List of potential filter columns-later
 filter_columns = ['Lead Status', 'Responsible','UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content']
-# ,'Type', 'Source','UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content', 'Nature of Project', 'D2C Website (y/n)', 'Services Needed']
+# ,'Type','Source','UTM Source','UTM Medium', 'UTM Campaign', 'UTM Content', 'Nature of Project', 'D2C Website (y/n)', 'Services Needed']
 
 # Dropdown for selecting the breakdown variable
 breakdown_var = st.sidebar.selectbox(
