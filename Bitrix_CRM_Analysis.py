@@ -4,8 +4,12 @@ import pandas as pd
 import plotly.express as px
 
 # Load the .xls file using the xlrd engine
-df = pd.read_excel("DEAL_Bitrix.xlsx")
-# Display the first few rows of the dataframe
+@st.cache_data
+def load_data()
+    df = pd.read_excel("Deal_Bitrix.xlsx")
+    return df
+
+df = load_data()
 
 # df.head()
 # for col in df.columns:
@@ -32,6 +36,7 @@ stages = ['Reach','Attract','Develop','Meeting Booked','SQL','Proposal','Contrac
 #stages
 
 # Making cumulative of stages by repeating all stages after it to that stage in an expanded dataframe
+@st.cache_data
 def expand_cumulative_stages(df, stages, stage_col='Stage'):
     expanded_data = []
     
