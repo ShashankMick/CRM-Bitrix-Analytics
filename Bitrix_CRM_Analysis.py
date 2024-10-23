@@ -77,17 +77,17 @@ max_date = cum_stages_breakdown_expanded['Created'].max()
 # Separate date input for start date
 start_date = st.sidebar.date_input(
     "Start Date",
-    value=min_date,
-    min_value=min_date,
-    max_value=max_date
+    value = min_date,
+    min_value = min_date,
+    max_value = max_date
 )
 
 # Separate date input for end date
 end_date = st.sidebar.date_input(
     "End Date",
-    value=max_date,
-    min_value=min_date,
-    max_value=max_date
+    value = max_date,
+    min_value = min_date,
+    max_value = max_date
 )
 
 # Display selected dates for debugging
