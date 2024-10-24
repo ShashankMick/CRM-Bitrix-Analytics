@@ -92,8 +92,7 @@ end_date = st.sidebar.date_input(
 )
 
 # Display selected dates for debugging
-st.write(f"Start Date: {start_date}")
-st.write(f"End Date: {end_date}")
+st.write(f"Period: {start_date} to {end_date}")
 
 # Ensure the start date is before the end date
 if start_date > end_date:
@@ -130,6 +129,7 @@ for col, values in selected_filters.items():
 
 # Group the data by Stage and the selected breakdown variable
 cumulative_grouped = filtered_df.groupby(['Stage', breakdown_var])['Count'].count().reset_index()
+# Group the data by Stage 
 cumulative_stage = filtered_df.groupby(['Stage'])['Count'].count().reset_index()
 
 # Create a stacked horizontal bar chart using Plotly
@@ -155,8 +155,9 @@ fig.update_layout(
 # Add text labels only for the cumulative total
 for i, stage in enumerate(stages):
     if stage not in list(cumulative_stage['Stage'].unique()):
-        continue 
-    cumulative_value = cumulative_stage.loc[cumulative_stage['Stage'] == stage, 'Count'].values[0]
+        cumulative_value = 0
+    else: 
+        cumulative_value = cumulative_stage.loc[cumulative_stage['Stage'] == stage, 'Count'].values[0]
     fig.add_annotation(
         x=cumulative_value,
         y=i,  # Corresponds to the y-position for each stage
