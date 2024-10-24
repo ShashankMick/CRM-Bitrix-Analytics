@@ -153,7 +153,7 @@ fig.update_layout(
 )
 
 # Add text labels only for  cumulative totals
-for i, stage in reversed(list(enumerate(stages)))::
+for i, stage in reversed(list(enumerate(stages))):
     try: 
         cumulative_value = cumulative_stage[cumulative_stage['Stage'] == stage]['Count'].values[0]
     except: 
