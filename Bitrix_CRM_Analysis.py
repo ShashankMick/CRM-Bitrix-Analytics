@@ -128,9 +128,9 @@ for col, values in selected_filters.items():
     filtered_df = filtered_df[filtered_df[col].isin(values)]
 
 # Group the data by Stage and the selected breakdown variable
-cumulative_grouped = filtered_df.groupby(['Stage', breakdown_var])['Count'].count().reset_index()
+cumulative_grouped = filtered_df.groupby(['Stage', breakdown_var])['Count'].sum().reset_index()
 # Group the data by Stage 
-cumulative_stage = filtered_df.groupby(['Stage'])['Count'].count().reset_index()
+cumulative_stage = filtered_df.groupby(['Stage'])['Count'].sum().reset_index()
 
 # Create a stacked horizontal bar chart using Plotly
 fig = px.bar(
