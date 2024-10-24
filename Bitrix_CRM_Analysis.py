@@ -169,4 +169,4 @@ for i, stage in enumerate(stages):
 st.plotly_chart(fig)
 
 # Add a footer message
-st.sidebar.write("Powered by Expedify")
+st.sidebar.write("Made by SSS")
