@@ -71,7 +71,7 @@ def expand_cumulative_stages(df, stages, stage_col='Stage'):
 cum_stages_breakdown_expanded = expand_cumulative_stages(df, stages)
 cum_stages_breakdown_expanded['Count']=1
 # Sidebar for user inputs
-st.sidebar.title("Filter Options")
+st.sidebar.title("Expedify Bitrix CRM Analytics")
 
 # Add date range filter in the sidebar
 min_date = cum_stages_breakdown_expanded['Created'].min()
@@ -146,11 +146,18 @@ fig = px.bar(
 
 # Update layout to reverse the y-axis order
 fig.update_layout(
-    yaxis={'categoryorder': 'total ascending'},
+    yaxis={'categoryorder': 'array', 'categoryarray': stages[::-1]},
     xaxis_title='Cumulative Count',
     yaxis_title='Stage',
     legend_title=breakdown_var
 )
+
+# Add text labels to show cumulative values on each bar
+fig.update_traces(
+    text=cumulative_grouped['Count'],
+    textposition='inside'  # Place labels inside the bars
+)
+
 
 # Display the chart
 st.plotly_chart(fig)
