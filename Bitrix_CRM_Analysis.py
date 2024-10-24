@@ -153,9 +153,9 @@ fig.update_layout(
 )
 
 # Add text labels only for  cumulative totals
-for i, stage in enumerate(stages):
+for i, stage in reversed(list(enumerate(stages)))::
     try: 
-        cumulative_value = cumulative_stage[cumulative_stage['Stage'] == stage]['Count']
+        cumulative_value = cumulative_stage[cumulative_stage['Stage'] == stage]['Count'].values[0]
     except: 
         cumulative_value = 0
     fig.add_annotation(
@@ -165,7 +165,7 @@ for i, stage in enumerate(stages):
         showarrow=False,
         xanchor='left',
         yanchor='middle',
-        font=dict(size=14, color='black')
+        font=dict(size=14, color='red')
     )
 
 # Display the chart
