@@ -170,6 +170,5 @@ for i, stage in (list(enumerate(stages))):
 
 # Display the chart
 st.plotly_chart(fig)
-
 # Add a footer message
 st.sidebar.write("X CRM")
