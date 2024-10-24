@@ -27,7 +27,6 @@ def load_data(df):
 
 df = load_data(data_load)
 
-
 # df.head()
 # for col in df.columns:
 #     print(f"Column: {col}")
