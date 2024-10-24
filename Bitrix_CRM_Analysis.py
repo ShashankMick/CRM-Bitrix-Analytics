@@ -160,7 +160,7 @@ for i, stage in enumerate(stages):
         cumulative_value = 0
     fig.add_annotation(
         x=cumulative_value,
-        y=i,  # Corresponds to the y-position for each stage
+        y=i, # Corresponds to the y-position for each stage
         text=str(cumulative_value),
         showarrow=False,
         xanchor='left',
