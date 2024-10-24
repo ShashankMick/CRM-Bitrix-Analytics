@@ -165,7 +165,7 @@ for i, stage in enumerate(stages):
         showarrow=False,
         xanchor='left',
         yanchor='middle',
-        font=dict(size=12, color='black')
+        font=dict(size=14, color='black')
     )
 
 # Display the chart
