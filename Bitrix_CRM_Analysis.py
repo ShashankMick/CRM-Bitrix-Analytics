@@ -152,7 +152,7 @@ fig.update_layout(
     legend_title=breakdown_var
 )
 
-# Add text labels only for the cumulative total of stages
+# Add text labels only for the cumulative total 
 for i, stage in enumerate(stages):
     try: 
         cumulative_value = cumulative_stage[cumulative_stage['Stage'] == stage]['Count']
