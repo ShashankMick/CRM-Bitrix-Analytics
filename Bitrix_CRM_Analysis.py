@@ -153,6 +153,7 @@ fig.update_layout(
     legend_title=breakdown_var
 )
 
+
 # Add text labels to show cumulative values on each bar
 fig.update_traces(
     text=cumulative_stage['Count'],
