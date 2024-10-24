@@ -154,7 +154,6 @@ fig.update_layout(
 
 # Add text labels only for the cumulative total
 for i, stage in enumerate(stages):
-
     try: 
         cumulative_value = cumulative_stage.loc[cumulative_stage['Stage'] == stage, 'Count'].values[0]
     except: 
