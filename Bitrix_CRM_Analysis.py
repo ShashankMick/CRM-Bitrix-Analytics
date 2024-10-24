@@ -155,7 +155,7 @@ fig.update_layout(
 # Add text labels only for the cumulative total of stages
 for i, stage in enumerate(stages):
     try: 
-        cumulative_value = cumulative_stage[cumulative_stage['Stage'] == stage]['Count'].values[0]
+        cumulative_value = cumulative_stage[cumulative_stage['Stage'] == stage]['Count']
     except: 
         cumulative_value = 0
     fig.add_annotation(
