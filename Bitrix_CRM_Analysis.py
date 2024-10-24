@@ -131,7 +131,7 @@ for col, values in selected_filters.items():
 
 # Group the data by Stage and the selected breakdown variable
 cumulative_grouped = filtered_df.groupby(['Stage', breakdown_var])['Count'].count().reset_index()
-cumulative_stage = filtered_df.groupby(['Stage'])['Count'].count().reset_index()
+cumulative_stage = filtered_df.groupby(['Stage'])['Deal Count'].count().reset_index()
 
 # Create a stacked horizontal bar chart using Plotly
 fig = px.bar(
@@ -153,13 +153,18 @@ fig.update_layout(
     legend_title=breakdown_var
 )
 
-
-# Add text labels to show cumulative values on each bar
-fig.update_traces(
-    text=cumulative_stage['Count'],
-    textposition='inside'  # Place labels inside the bars
-)
-
+# Add text labels only for the cumulative total
+for i, stage in enumerate(stages):
+    cumulative_value = cumulative_stage.loc[cumulative_stage['Stage'] == stage, 'Deal Count'].values[0]
+    fig.add_annotation(
+        x=cumulative_value,
+        y=i,  # Corresponds to the y-position for each stage
+        text=str(cumulative_value),
+        showarrow=False,
+        xanchor='left',
+        yanchor='middle',
+        font=dict(size=12, color='black')
+    )
 
 # Display the chart
 st.plotly_chart(fig)
