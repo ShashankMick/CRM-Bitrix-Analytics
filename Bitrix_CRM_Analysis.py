@@ -7,8 +7,6 @@ import plotly.express as px
 # st.cache_data.clear()
 # st.cache_resource.clear()
 
-data_load = pd.read_excel("Deal_Bitrix.xlsx")
-
 # Load the .xls file using the xlrd engine
 @st.cache_data
 def load_data(df):
@@ -24,6 +22,17 @@ def load_data(df):
     'Contact: Do you have a D2C/eCommerce webiste': 'D2C Website (y/n)',
     'Contact: Do you need any help with your online business?': 'Services Needed'}, inplace=True)
     return df
+
+# File upload widget in the sidebar
+uploaded_file = st.sidebar.file_uploader("Upload your Excel file", type=["xlsx"])
+
+# Load data based on uploaded file or default file
+if uploaded_file is not None:
+    # Use the uploaded file
+    data_load = pd.read_excel(uploaded_file, engine='openpyxl')
+else:
+    # Use the default file if no file is uploaded
+    data_load = pd.read_excel("Deal_Bitrix.xlsx", engine='openpyxl')
 
 df = load_data(data_load)
 
