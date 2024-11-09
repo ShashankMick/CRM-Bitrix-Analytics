@@ -127,7 +127,7 @@ for col in filter_columns:
     selected_values = st.sidebar.multiselect(f'Select {col}', unique_values, default=unique_values)
     selected_filters[col] = selected_values
 
-def make_bar_chart(df):
+def make_bar_chart(df,chart_key):
 
     # Filter the DataFrame based on user-selected filters and date range
     filtered_df = df.copy()
@@ -182,11 +182,11 @@ def make_bar_chart(df):
         )
 
     # Display the chart
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, key=chart_key)
 
 st.write("Cumulative for All Stages")
-make_bar_chart(cum_stages_breakdown_expanded)
+make_bar_chart(cum_stages_breakdown_expanded, chart_key = 'cumulative_bar')
 st.write("Current Status for All Stages")
-make_bar_chart(non_cum_stages_breakdown_expanded)
+make_bar_chart(non_cum_stages_breakdown_expanded, chart_key = 'current_status_bar')
 # Add a footer message
 st.sidebar.write("Expedify CRM")
