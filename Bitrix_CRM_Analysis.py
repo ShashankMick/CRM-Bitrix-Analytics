@@ -77,7 +77,8 @@ def expand_cumulative_stages(df, stages, stage_col='Stage'):
 cum_stages_breakdown_expanded = expand_cumulative_stages(df, stages)
 cum_stages_breakdown_expanded['Count']=1
 # Only keep rows that appear once (no duplicates at all) - non_cumulative
-non_cum_stages_breakdown_expanded = cum_stages_breakdown_expanded.drop_duplicates(keep=False)
+df['Count']=1
+non_cum_stages_breakdown_expanded = df
 # Sidebar for user inputs
 st.sidebar.title("Expedify Bitrix CRM Analytics")
 
@@ -152,7 +153,7 @@ def make_bar_chart(df,chart_key):
         orientation='h',
         barmode='stack',
         labels={'Count': 'Cumulative Count', 'Stage': 'Stage'},
-        title=f'Cumulative Stage Counts by {breakdown_var} (Date Range: {start_date} to {end_date})'
+        title=f'Stage Counts by {breakdown_var} (Date Range: {start_date} to {end_date})'
     )
 
     # Update layout to reverse the y-axis order
