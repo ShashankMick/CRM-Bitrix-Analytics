@@ -6,8 +6,8 @@ import plotly.express as px
 # Clear cache on app update
 # st.cache_data.clear()
 # st.cache_resource.clear()
-
 # Load the .xls file using the xlrd engine
+
 @st.cache_data
 def load_data(df):
     
