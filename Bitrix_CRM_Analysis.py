@@ -83,51 +83,51 @@ non_cum_stages_breakdown_expanded = cum_stages_breakdown_expanded.drop_duplicate
 # Sidebar for user inputs
 st.sidebar.title("Expedify Bitrix CRM Analytics")
 
+# Add date range filter in the sidebar
+min_date = df['Created'].min()
+max_date = df['Created'].max()
+# Separate date input for start date
+start_date = st.sidebar.date_input(
+    "Start Date",
+    value = min_date,
+    min_value = min_date,
+    max_value = max_date
+)
+
+# Separate date input for end date
+end_date = st.sidebar.date_input(
+    "End Date",
+    value = max_date,
+    min_value = min_date,
+    max_value = max_date
+)
+
+# Display selected dates for debugging
+st.write(f"Period: {start_date} to {end_date}")
+
+# Ensure the start date is before the end date
+if start_date > end_date:
+    st.error("Error: Start date must be before or equal to the end date.")
+# List of potential filter columns-later
+filter_columns = ['Lead Status', 'Responsible','Source','UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content','Nature of Project', 'D2C Website (y/n)', 'Services Needed','LS - Service Fit', 'LS - Urgency', 'LG - Budget Availability', 'LG - Decision Making Capability']
+# 
+
+# Dropdown for selecting the breakdown variable
+breakdown_var = st.sidebar.selectbox(
+    'Select Breakdown Variable',
+    filter_columns
+)
+
+# Dictionary to store selected filters
+selected_filters = {}
+
+# Loop through each filter column and create multiselect dropdowns
+for col in filter_columns:
+    unique_values = list(df[col].dropna().unique())
+    selected_values = st.sidebar.multiselect(f'Select {col}', unique_values, default=unique_values)
+    selected_filters[col] = selected_values
+
 def make_bar_chart(df):
-
-    # Add date range filter in the sidebar
-    min_date = df['Created'].min()
-    max_date = df['Created'].max()
-    # Separate date input for start date
-    start_date = st.sidebar.date_input(
-        "Start Date",
-        value = min_date,
-        min_value = min_date,
-        max_value = max_date
-    )
-
-    # Separate date input for end date
-    end_date = st.sidebar.date_input(
-        "End Date",
-        value = max_date,
-        min_value = min_date,
-        max_value = max_date
-    )
-
-    # Display selected dates for debugging
-    st.write(f"Period: {start_date} to {end_date}")
-
-    # Ensure the start date is before the end date
-    if start_date > end_date:
-        st.error("Error: Start date must be before or equal to the end date.")
-    # List of potential filter columns-later
-    filter_columns = ['Lead Status', 'Responsible','Source','UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content','Nature of Project', 'D2C Website (y/n)', 'Services Needed','LS - Service Fit', 'LS - Urgency', 'LG - Budget Availability', 'LG - Decision Making Capability']
-    # 
-
-    # Dropdown for selecting the breakdown variable
-    breakdown_var = st.sidebar.selectbox(
-        'Select Breakdown Variable',
-        filter_columns
-    )
-
-    # Dictionary to store selected filters
-    selected_filters = {}
-
-    # Loop through each filter column and create multiselect dropdowns
-    for col in filter_columns:
-        unique_values = list(df[col].dropna().unique())
-        selected_values = st.sidebar.multiselect(f'Select {col}', unique_values, default=unique_values)
-        selected_filters[col] = selected_values
 
     # Filter the DataFrame based on user-selected filters and date range
     filtered_df = df.copy()
@@ -184,7 +184,9 @@ def make_bar_chart(df):
     # Display the chart
     st.plotly_chart(fig)
 
+st.write("Cumulative for All Stages")
 make_bar_chart(cum_stages_breakdown_expanded)
+st.write("Current Status for All Stages")
 make_bar_chart(non_cum_stages_breakdown_expanded)
 # Add a footer message
 st.sidebar.write("Expedify CRM")
