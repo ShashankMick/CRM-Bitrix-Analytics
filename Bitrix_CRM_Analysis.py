@@ -51,7 +51,7 @@ df.loc[:, 'Modified'] = pd.to_datetime(df['Modified'], format='%d.%m.%Y %H:%M:%S
 
 #Extracting all stages
 # stages = df['Stage'].unique().tolist()
-stages = ['Reach','Attract','Develop','Meeting Booked','SQL','Proposal','Contract Sent','Negotiation','Onboarded','Renewal', 'Analyze failure']
+stages = ['Reach','Attract','Develop','Meeting Booked','SQL','Proposal','Contract Sent','Negotiation','Contract Signed', 'Onboarded','Renewal', 'Analyze failure']
 #stages
 
 # Making cumulative of stages by repeating all stages after it to that stage in an expanded dataframe
